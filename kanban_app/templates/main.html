@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+
+{% block content %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'kanban_app/css/main.css' %}">
+        <meta charset="utf-8">
+        <title>TRELLO CLONE</title>
+    </head>
+    <body>
+        <h4>TASK LISTS</h4>
+        <div class="modal fade bd-example-modal-sm" id = "modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="form-group">
+                        <h3>Add Task</h3>
+                        <form>
+                            New Task: <input type="text" id="addTask" name="title"><br><br>
+                            <select id="priority">
+                                <option>Priority</option>
+                                <option value='H'>High</option>
+                                <option value='M'>Medium</option>
+                                <option value='L'>Low</option>
+                            </select><br><br>
+                            <select id="status">
+                                <option>Status</option>
+                                <option value='N'>New</option>
+                                <option value='P'>In Progress</option>
+                                <option value='C'>Done</option>
+                            </select><br><br>
+                            Description: <input type="text" id="addDesc" name="description"><br><br>
+                            <select id="person">
+                                <option>Assigned to</option>
+                                <option value='1'>John</option>
+                                <option value='2'>Tracy</option>
+                                <option value='3'>Zach</option>
+                            </select><br><br>
+                            <button class = 'btn btn-primary' id="add">add </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade edit-modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="form-group">
+                        <h3>Edit Task</h3>
+                        <form>
+                            <h4>Task ID: </h4>
+                            <select id = "getID">
+                                <option>Task ID</option>
+                                <option></option>
+                            </select><br><br>
+                            Edit Title: <input type="text" id="title" name="New Title"><br><br>
+                            <select id="priority1">
+                                <option>Priority</option>
+                                <option value='H'>High</option>
+                                <option value='M'>Medium</option>
+                                <option value='L'>Low</option>
+                            </select>
+                            <br><br>
+                            <select id="status1">
+                                <option>Status</option>
+                                <option value='N'>new</option>
+                                <option value='P'>in progress</option>
+                                <option value='C'>done</option>
+                            </select><br><br>
+                            Description: <input type="text" id="addDesc1" name="New Description"><br><br>
+                            <select id="person">
+                                <option>Assigned to</option>
+                                <option value='1'>John</option>
+                                <option value='2'>Tracy</option>
+                                <option value='3'>Zach</option>
+                            </select><br><br>
+                            <button class='btn btn-primary' id="try_patch">Edit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">JOHN D. BOWER</h6>
+                        <ul class="fortask">
+                            <ul class="fortask">
+                                <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Edit Task <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Create New Task</button>
+                                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".edit-modal">Edit/Delete Task</button>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </div>
+                    <div id='task1' class="container">
+                        <ol id="task1list">
+                            <tr><b>ID | Title | Status | Priority</tr>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">TRACY</h6>
+                        <ul class="fortask">
+                            <ul class="fortask">
+                                <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Edit Task <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Create New Task</button>
+                                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".edit-modal">Edit/Delete Task</button>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </div>
+                    <div id='task2' class="container">
+                        <ol id="task2list">
+                            <tr><b>ID | Title | Status | Priority</tr>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">ZACH FERGUSON</h6>
+                        <ul class="fortask">
+                            <ul class="fortask">
+                                <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Edit Task <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Create New Task</button>
+                                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".edit-modal">Edit/Delete Task</button>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </div>
+                    <div id='task3' class="container">
+                        <ol id="task3list">
+                            <tr><b>ID | Title | Status | Priority</tr>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'kanban_app/js/main.js' %}"></script>
+</body>
+</html>
+{% endblock %}
