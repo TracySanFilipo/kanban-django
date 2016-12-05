@@ -48,6 +48,7 @@ function taskDelete(input_url){
    task_url = "" + input_url
  jQuery.ajax({url:input_url, type:'DELETE'
    }).done(function(){})
+   }
 
 
 function reply_click(clicked_id){
@@ -74,21 +75,22 @@ function taskList(){
         $.ajax("http://127.0.0.1:8000/api/task/").done(function(results){
             var tasks = results.results
             for(var i = 0; i < tasks.length; i++){
-                if (task[i]['person'] == '1'){
+                if (tasks[i]['person'] == 'J'){
                     $orderedlist.html($orderedlist.html()+ tasks[i]['id'] + " "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['title'] + " "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['status'] + "  "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['priority'] + " "),
-                    $orderedlist.html($orderedlist.html()+ tasks[i]['description'] + "<br>"),
+                    $orderedlist.html($orderedlist.html()+ tasks[i]['description']),
                     $orderedlist.html($orderedlist.html()+ '<button class="deleteButton" onClick="reply_click(this.id)" content="X" id=' + '"' + tasks[i]['url'] + '"' + '>' + "X" + '</button>' + "<br>"),
+                    console.log(tasks[i]['person'])
                     $("#task1list").append($orderedlist);
                     }
-                else if (task[i]['person'] == '2'){
+                else if (tasks[i]['person'] == 'T'){
                     $orderedlist.html($orderedlist.html()+ tasks[i]['id'] + " "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['title'] + " "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['status'] + "  "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['priority'] + " "),
-                    $orderedlist.html($orderedlist.html()+ tasks[i]['description'] + "<br>"),
+                    $orderedlist.html($orderedlist.html()+ tasks[i]['description']),
                     $orderedlist.html($orderedlist.html()+ '<button class="deleteButton" onClick="reply_click(this.id)" content="X" id=' + '"' + tasks[i]['url'] + '"' + '>' + "X" + '</button>' + "<br>"),
                     $("#task2list").append($orderedlist);
                     }
@@ -97,8 +99,9 @@ function taskList(){
                     $orderedlist.html($orderedlist.html()+ tasks[i]['title'] + " "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['status'] + "  "),
                     $orderedlist.html($orderedlist.html()+ tasks[i]['priority'] + " "),
-                    $orderedlist.html($orderedlist.html()+ tasks[i]['description'] + "<br>"),
+                    $orderedlist.html($orderedlist.html()+ tasks[i]['description']),
                     $orderedlist.html($orderedlist.html()+ '<button class="deleteButton" onClick="reply_click(this.id)" content="X" id=' + '"' + tasks[i]['url'] + '"' + '>' + "X" + '</button>' + "<br>"),
+                    console.log(tasks[i]['person'])
                     $("#task3list").append($orderedlist);
                     }
             }
